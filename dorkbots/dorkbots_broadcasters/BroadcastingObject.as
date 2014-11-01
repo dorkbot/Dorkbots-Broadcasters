@@ -45,7 +45,7 @@ package dorkbots.dorkbots_broadcasters
 		
 		protected final function broadcastEvent(name:String, object:Object = null):void
 		{
-			broadcasterManager.broadcastEvent( name, object );
+			if (broadcasterManager) broadcasterManager.broadcastEvent( name, object );
 		}
 		
 		/**
