@@ -12,6 +12,7 @@ package dorkbots.dorkbots_util
 		private static var _instance:TwitterStringParser;
 		
 		public var textEvent:Boolean = false;
+		
 		public var userNameClass:String = "userName";
 		public var hashtagClass:String = "hashtag";
 		public var hyperlinkClass:String = "hyperlink";
