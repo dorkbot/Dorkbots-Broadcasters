@@ -4,7 +4,7 @@ package dorkbots.dorkbots_util
 	/**
 	 * The TwitterStringParser class assists with the parsing of a tweet to add hyperlinks 
 	 * around Links, HashTags, and UserNames in a tweet.
-	 * based on Joseph Labrecque's work.
+	 * based on Joseph Labrecque's work - http://inflagrantedelicto.memoryspiral.com/2010/01/parsing-tweets-with-the-twitterstring-class/
 	 */ 
 	
 	public class TwitterStringParser
