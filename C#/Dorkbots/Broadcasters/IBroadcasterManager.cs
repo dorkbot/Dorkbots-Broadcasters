@@ -30,31 +30,14 @@
 * THE SOFTWARE.
 */
 
-
 using System;
 
 namespace Dorkbots.Broadcasters
 {
-    public class Broadcaster : IBroadcaster
-    {
-        public Broadcaster()
-        {
-        }
-
-        public void SendBroadcast(string message, object sender, IBroadcaster broadcaster, object dataObject = null)
-        {
-            OnBroadcastEvent(new BroadcasterEvent(message, sender, broadcaster, dataObject));
-        }
-
-        private event EventHandler _BroadcastEvent;
-        public EventHandler BroadcastEvent{ get{ return _BroadcastEvent; } set{ _BroadcastEvent = value; } }
-        private void OnBroadcastEvent(BroadcasterEvent e)
-        {
-            EventHandler handler = _BroadcastEvent;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-    }
+	public interface IBroadcasterManager
+	{
+		void AddEventHandler(string eventName, EventHandler handler);
+		void RemoveEventHandler(string eventName, EventHandler handler);
+		void RemoveAllEventHandlers();
+	}
 }

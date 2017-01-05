@@ -30,31 +30,53 @@
 * THE SOFTWARE.
 */
 
-
+using System.Collections.Generic;
 using System;
 
 namespace Dorkbots.Broadcasters
 {
-    public class Broadcaster : IBroadcaster
-    {
-        public Broadcaster()
-        {
-        }
+	public class BroadcasterManager : IBroadcasterManager 
+	{
+		private Dictionary<string, IBroadcaster> broadcasterDictionary;
 
-        public void SendBroadcast(string message, object sender, IBroadcaster broadcaster, object dataObject = null)
-        {
-            OnBroadcastEvent(new BroadcasterEvent(message, sender, broadcaster, dataObject));
-        }
+		public BroadcasterManager()
+		{
+			broadcasterDictionary = new Dictionary<string, IBroadcaster>();
+		}
 
-        private event EventHandler _BroadcastEvent;
-        public EventHandler BroadcastEvent{ get{ return _BroadcastEvent; } set{ _BroadcastEvent = value; } }
-        private void OnBroadcastEvent(BroadcasterEvent e)
-        {
-            EventHandler handler = _BroadcastEvent;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-    }
+		public void AddEventHandler(string eventName, EventHandler handler)
+		{
+			IBroadcaster broadcaster;
+			if (!broadcasterDictionary.ContainsKey (eventName))
+			{
+				broadcaster = new Broadcaster ();
+				broadcasterDictionary.Add (eventName, broadcaster);
+			} 
+			else
+			{
+				broadcaster = broadcasterDictionary [eventName];
+			}
+
+			broadcaster.BroadcastEvent -= handler;
+			broadcaster.BroadcastEvent += handler;
+		}
+
+		public void RemoveEventHandler(string eventName, EventHandler handler)
+		{
+			if (broadcasterDictionary.ContainsKey (eventName))
+			{
+				broadcasterDictionary [eventName].BroadcastEvent -= handler;
+			} 
+		}
+
+		public void RemoveAllEventHandlers()
+		{
+			foreach (IBroadcaster value in broadcasterDictionary.Values)
+			{
+				value.BroadcastEvent = null;
+			}
+
+			broadcasterDictionary = new Dictionary<string, IBroadcaster>();
+		}
+	}
 }
