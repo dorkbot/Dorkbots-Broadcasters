@@ -41,16 +41,13 @@ namespace Dorkbots.Broadcasters
         public string message{ get{ return _message; } }
         private object _sender;
         public object sender{ get{ return _sender; } }
-        private IBroadcaster _broadcaster;
-        public IBroadcaster broadcaster{ get{ return _broadcaster; } }
-        private object _dataObject;
-        public object dataObject{ get{ return _dataObject; } }
+		private object _dataObject;
+		public object dataObject{ get{ return _dataObject; } }
 
-        public BroadcasterEvent(string message, object sender, IBroadcaster broadcaster, object dataObject = null)
+		public BroadcasterEvent(string message, object sender, object dataObject = null)
         {
             _message = message;
             _sender = sender;
-            _broadcaster = broadcaster;
             _dataObject = dataObject;
         }
     }

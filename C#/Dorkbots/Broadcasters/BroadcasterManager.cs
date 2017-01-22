@@ -44,6 +44,14 @@ namespace Dorkbots.Broadcasters
 			broadcasterDictionary = new Dictionary<string, IBroadcaster>();
 		}
 
+		public void BroadcastEvent(string eventName, object sender, object dataObject = null)
+		{
+			if (broadcasterDictionary.ContainsKey (eventName))
+			{
+				broadcasterDictionary [eventName].SendBroadcast (eventName, sender, dataObject);
+			}
+		}
+
 		public void AddEventHandler(string eventName, EventHandler handler)
 		{
 			IBroadcaster broadcaster;
@@ -56,7 +64,7 @@ namespace Dorkbots.Broadcasters
 			{
 				broadcaster = broadcasterDictionary [eventName];
 			}
-
+			// first remove the handler to make sure there are no duplicates
 			broadcaster.BroadcastEvent -= handler;
 			broadcaster.BroadcastEvent += handler;
 		}

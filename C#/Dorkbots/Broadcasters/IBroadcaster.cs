@@ -37,7 +37,7 @@ namespace Dorkbots.Broadcasters
 {
     public interface IBroadcaster
     {
-        void SendBroadcast(string message, object sender, IBroadcaster broadcaster, object dataObject = null);
+		void SendBroadcast (string message, object sender, object dataObject = null);
         EventHandler BroadcastEvent{ get; set; }
     }
 }

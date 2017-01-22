@@ -36,6 +36,7 @@ namespace Dorkbots.Broadcasters
 {
 	public interface IBroadcasterManager
 	{
+		void BroadcastEvent (string eventName, object sender, object dataObject = null);
 		void AddEventHandler(string eventName, EventHandler handler);
 		void RemoveEventHandler(string eventName, EventHandler handler);
 		void RemoveAllEventHandlers();

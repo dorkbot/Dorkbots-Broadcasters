@@ -41,9 +41,9 @@ namespace Dorkbots.Broadcasters
         {
         }
 
-        public void SendBroadcast(string message, object sender, IBroadcaster broadcaster, object dataObject = null)
+        public void SendBroadcast(string message, object sender, object dataObject = null)
         {
-            OnBroadcastEvent(new BroadcasterEvent(message, sender, broadcaster, dataObject));
+            OnBroadcastEvent(new BroadcasterEvent(message, sender, dataObject));
         }
 
         private event EventHandler _BroadcastEvent;
@@ -52,8 +52,8 @@ namespace Dorkbots.Broadcasters
         {
             EventHandler handler = _BroadcastEvent;
             if (handler != null)
-            {
-                handler(this, e);
+			{
+				handler(e.sender, e);
             }
         }
     }
